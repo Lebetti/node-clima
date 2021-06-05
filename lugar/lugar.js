@@ -4,20 +4,19 @@ const getLugar = async (dir) =>{
     const dirCodif = encodeURI(dir);
     
     const instancia = axios.create({
-        baseURL: `https://devru-latitude-longitude-find-v1.p.rapidapi.com/latlon.php?location=${dirCodif}`,
-        headers: {'X-RapidAPI-Key': '19003cb3bcmsh58052d3b4b851a9p1893c0jsnddcf66edff04'}
+        baseURL: `http://api.positionstack.com/v1/forward?access_key=781e8870bf686fabc5c65bcc8a66c66f&query=${dirCodif}`,
       });
     
     const respuesta = await instancia.get();
 
-    if(respuesta.data.Results.length === 0)
+    if(respuesta.data.length === 0)
     {
         throw new Error ( `No hay resultados para la dirección ${dir} ingresada`);
     }
 
-    const informacion= respuesta.data.Results[0];
+    const informacion= respuesta.data.data[0];
 
-    const {name,lat,lon:long} = informacion;
+    const {name,latitude:lat,longitude:long} = informacion;
 
     return {
         name,

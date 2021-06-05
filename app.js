@@ -19,6 +19,7 @@ const getInfo = async (dir) => {
     try{
         let ubicacion = await lugar.getLugar(dir);
         let temperatura = await clima.getClima(ubicacion.lat,ubicacion.long);
+        
         //return `El clima de ${ubicacion.name} cuya latitud y longitud son ${ubicacion.lat} , ${ubicacion.long} es de ${temperatura}°C`;
     
         return {
